@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head %} 
+<h1> This is the head </h1>
+{% endblock %}
+
+
+{% block body %}
+<h4> This is the body </h4>
+<br>
+<h5> {{ dataValue }}</h5>
+ {% for e in varlist %} 
+
+ <p>ID: <h6>{{ e.id }}</h6> </p>
+ <p> Username: <h5> {{ e.username }} </h5></p>
+ 
+ <form action="{{ url_for('delete_user', user_id=e.id )}}" method="POST">
+    <h6>delete</h6>
+    <input type="submit" value="delete">
+   
+ </form>
+ <form action="{{ url_for('update_user', user_id=e.id) }}" method="POST">
+    <label for="new_username">New Username:</label>
+    <input type="text" id="new_username" name="new_username" required>
+    <button type="submit">Update User</button>
+</form>
+ {% endfor %}
+
+ <a href="{{ url_for('create_user')}}"> create user page</a>
+{% endblock %}
